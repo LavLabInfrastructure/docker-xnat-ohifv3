@@ -5,10 +5,6 @@ on:
   schedule:
     - cron: '0 2 * * *'  # Check daily at 2 AM UTC
   
-  # Trigger B: When OHIF plugin repository has a new release
-  repository_dispatch:
-    types: [ohif-plugin-release]
-  
   # Manual trigger for testing
   workflow_dispatch:
     inputs:
@@ -21,7 +17,7 @@ on:
 env:
   REGISTRY: ghcr.io
   BASE_IMAGE: ghcr.io/australian-imaging-service/xnat
-  IMAGE_NAME: ${{ github.repository_owner }}.xnat
+  IMAGE_NAME: ${{ github.repository_owner }}/xnat
 
 jobs:
   check-updates:
@@ -125,20 +121,3 @@ jobs:
           git add .github/last-base-digest
           git diff --staged --quiet || git commit -m "Update tracked base image digest [skip ci]"
           git push
-
-  notify:
-    needs: [check-updates, build-and-push]
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Notify completion
-        run: |
-          if [ "${{ needs.build-and-push.result }}" = "success" ]; then
-            echo "✅ Docker image built and pushed successfully!"
-            echo "Image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
-          elif [ "${{ needs.check-updates.outputs.should-build }}" = "false" ]; then
-            echo "ℹ️ No updates detected, skipping build"
-          else
-            echo "❌ Build failed"
-            exit 1
-          fi
