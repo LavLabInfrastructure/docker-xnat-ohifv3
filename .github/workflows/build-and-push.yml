@@ -73,7 +73,7 @@ jobs:
     if: needs.check-updates.outputs.should-build == 'true'
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
     steps:
       - name: Checkout repository
