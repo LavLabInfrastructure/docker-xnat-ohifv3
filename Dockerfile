@@ -21,6 +21,7 @@ WORKDIR /tmp
 COPY ohif-plugin/*.jar /tmp/
 RUN set -e; \
     JAR_FILE=$(ls /tmp/*.jar | tail -n1); \
+    rm -f /data/xnat/home/plugins/ohif-viewer-*.jar; \
     cp "$JAR_FILE" /data/xnat/home/plugins/ohif-viewer-1.0.0.jar;
 
 RUN ls -la /data/xnat/home/plugins/
