@@ -1,5 +1,5 @@
 # Use the Australian Imaging Service XNAT base image
-FROM ghcr.io/australian-imaging-service/xnat:latest
+FROM ghcr.io/australian-imaging-service/xnat:1.10.1
 ARG XNAT_HOME=/data/xnat/home
 
 # Install OHIF v3 Plugin
