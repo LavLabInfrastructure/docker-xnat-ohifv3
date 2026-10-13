@@ -16,12 +16,15 @@ RUN mkdir -p $XNAT_HOME/plugins
 # Note: This supports both public and private repositories
 WORKDIR /tmp
 
-
 # Copy any JAR from the repository and rename the highest version to ohif-viewer-1.0.0.jar
 COPY ohif-plugin/*.jar /tmp/
 RUN set -e; \
     JAR_FILE=$(ls /tmp/*.jar | tail -n1); \
     rm -f /data/xnat/home/plugins/ohif-viewer-*.jar; \
-    cp "$JAR_FILE" /data/xnat/home/plugins/ohif-viewer-1.0.0.jar;
+    cp "$JAR_FILE" /data/xnat/home/plugins/ohif-viewer-1.0.0.jar; 
+
+RUN curl -Lo xnat-custom-form-event-plugin-1.0.0.jar \
+    https://github.com/LavLabInfrastructure/xnat-custom-form-event-plugin/releases/download/v0.1.0/xnat-custom-form-event-plugin-0.1.0-xpl.jar && \
+    cp xnat-custom-form-event-plugin-1.0.0.jar /data/xnat/home/plugins/
 
 RUN ls -la /data/xnat/home/plugins/
