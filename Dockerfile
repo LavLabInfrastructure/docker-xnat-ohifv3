@@ -24,7 +24,7 @@ RUN set -e; \
     cp "$JAR_FILE" /data/xnat/home/plugins/ohif-viewer-1.0.0.jar; 
 
 RUN curl -Lo custom-form-event-plugin-1.0.0.jar \
-    https://github.com/LavLabInfrastructure/xnat-custom-form-event-plugin/releases/download/v0.2.2/xnat-custom-form-event-plugin-0.2.2-xpl.jar && \
+    https://github.com/LavLabInfrastructure/xnat-custom-form-event-plugin/releases/download/v0.2.3/xnat-custom-form-event-plugin-0.2.3-xpl.jar && \
     cp custom-form-event-plugin-1.0.0.jar /data/xnat/home/plugins/
 
 RUN ls -la /data/xnat/home/plugins/
