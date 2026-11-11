@@ -1,5 +1,5 @@
 # Use the Australian Imaging Service XNAT base image
-FROM ghcr.io/australian-imaging-service/xnat:1.10.1
+FROM ghcr.io/australian-imaging-service/xnat:v1.10.2.1
 ARG XNAT_HOME=/data/xnat/home
 
 # Install OHIF v3 Plugin
@@ -24,7 +24,7 @@ RUN set -e; \
     cp "$JAR_FILE" /data/xnat/home/plugins/ohif-viewer-1.0.0.jar; 
 
 RUN curl --fail -Lo custom-form-event-plugin-1.0.0.jar \
-    https://github.com/LavLabInfrastructure/xnat-custom-form-event-plugin/releases/download/v0.3.1/xnat-custom-form-event-plugin-0.3.1-xpl.jar && \
+    https://github.com/LavLabInfrastructure/xnat-custom-form-event-plugin/releases/download/v0.4.0/xnat-custom-form-event-plugin-0.4.0-xpl.jar && \
     cp custom-form-event-plugin-1.0.0.jar /data/xnat/home/plugins/
 
 RUN ls -la /data/xnat/home/plugins/
